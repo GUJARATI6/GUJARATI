@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Market Analysis - Gujarati Trader</title>
+<meta name="description" content="Daily Market Updates & Educational Content in Gujarati">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Noto+Sans+Gujarati:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0d1512;
+    --bg-soft: #121c18;
+    --panel: #16211c;
+    --line: #24342c;
+    --gold: #d7ab4f;
+    --gold-soft: #eccd8a;
+    --up: #3fb37f;
+    --text: #f0ede4;
+    --muted: #93a39a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(215,171,79,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(63,179,127,0.08), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .gu{ font-family:'Noto Sans Gujarati', sans-serif; }
+  .display{ font-family:'Baloo 2', 'Noto Sans Gujarati', sans-serif; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  .wrap{ max-width:520px; margin:0 auto; padding:0 22px; }
+
+  /* ---- Top banner ---- */
+  .top-banner{
+    background:var(--bg-soft);
+    border-bottom:1px solid var(--line);
+    padding:10px 16px;
+    text-align:center;
+    font-size:13px;
+    color:var(--gold-soft);
+    line-height:1.5;
+    transition:background .3s ease;
+    cursor:default;
+  }
+  .top-banner:hover{ background:#182620; }
+  .top-banner b{ color:var(--text); }
+
+  /* ---- Hero ---- */
+  header.hero{ padding:34px 0 26px; text-align:center; position:relative; }
+
+  .chart-bg{ position:absolute; inset:0; z-index:0; opacity:.5; pointer-events:none; }
+  .hero-inner{ position:relative; z-index:1; }
+
+  .badge-ring{
+    width:112px; height:112px; margin:0 auto 16px;
+    border-radius:50%;
+    padding:3px;
+    background: conic-gradient(from 220deg, var(--gold), var(--up), var(--gold));
+    animation: ring-spin 6s linear infinite, ring-float 3s ease-in-out infinite;
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .badge-ring:hover{ transform:scale(1.1); }
+  @keyframes ring-spin{
+    from{ background: conic-gradient(from 220deg, var(--gold), var(--up), var(--gold)); }
+    to{ background: conic-gradient(from 580deg, var(--gold), var(--up), var(--gold)); }
+  }
+  @keyframes ring-float{
+    0%,100%{ margin-top:0; }
+    50%{ margin-top:-6px; }
+  }
+  .badge-ring img{ transition:filter .3s ease; }
+  .badge-ring:hover img{ filter:brightness(1.1); }
+  .badge-ring img{
+    width:100%; height:100%; border-radius:50%;
+    object-fit:cover; display:block;
+    border:3px solid var(--bg);
+  }
+
+  h1.brand{
+    font-size:34px; line-height:1.05; margin:0 0 4px;
+    font-weight:800; letter-spacing:.01em;
+    color:var(--text);
+    transition:letter-spacing .3s ease;
+    cursor:default;
+  }
+  h1.brand:hover{ letter-spacing:.04em; }
+  h1.brand span{
+    color:var(--gold);
+    transition:color .3s ease;
+    animation: glow-pulse 2.2s ease-in-out infinite;
+  }
+  h1.brand:hover span{ color:var(--gold-soft); }
+  @keyframes glow-pulse{
+    0%,100%{ text-shadow:0 0 0px rgba(215,171,79,0); }
+    50%{ text-shadow:0 0 14px rgba(215,171,79,0.55); }
+  }
+
+  .role{
+    font-size:13px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--up); font-weight:600; margin-bottom:16px;
+    transition:letter-spacing .3s ease, color .3s ease;
+    display:inline-block;
+    cursor:default;
+  }
+  .role:hover{ letter-spacing:.16em; color:#5fe0a5; }
+
+  .tagline{
+    font-size:16px; color:var(--muted); margin:0 auto 26px;
+    max-width:360px; line-height:1.6;
+    transition:color .3s ease;
+    cursor:default;
+  }
+  .tagline:hover{ color:var(--text); }
+
+  /* ---- Stats ---- */
+  .stats{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:10px; margin-bottom:26px;
+  }
+  .stat-card{
+    border:1px solid var(--line); border-radius:14px;
+    background:var(--panel);
+    padding:16px 8px;
+    transition:transform .2s ease, border-color .2s ease;
+    animation: float-card 3.6s ease-in-out infinite;
+  }
+  .stat-card:nth-child(1){ animation-delay:0s; }
+  .stat-card:nth-child(2){ animation-delay:.4s; }
+  .stat-card:nth-child(3){ animation-delay:.8s; }
+  .stat-card:hover{ transform:translateY(-6px) scale(1.04); border-color:rgba(215,171,79,0.4); animation-play-state:paused; }
+  @keyframes float-card{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-5px); }
+  }
+  .stat-num{ font-size:22px; font-weight:800; color:var(--gold); font-family:'Baloo 2', sans-serif; transition:color .2s ease; }
+  .stat-card:hover .stat-num{ color:var(--gold-soft); }
+  .stat-label{ font-size:12px; color:var(--muted); margin-top:4px; }
+
+  /* ---- CTA ---- */
+  .cta-wrap{ text-align:center; margin-bottom:30px; display:flex; flex-direction:column; align-items:center; gap:14px; }
+  .cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:linear-gradient(180deg, var(--gold-soft), var(--gold));
+    background-size:200% 200%;
+    background-position:0% 0%;
+    color:#1a1408;
+    font-weight:800; font-size:19px;
+    padding:20px 42px;
+    border-radius:14px;
+    text-decoration:none;
+    box-shadow:0 12px 28px -8px rgba(215,171,79,0.6);
+    transition:transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, filter .25s ease, background-position .6s ease;
+    animation: cta-pulse 2.4s ease-in-out infinite;
+    position:relative;
+  }
+  .cta.secondary{
+    background:linear-gradient(180deg, #4fcf95, var(--up));
+    box-shadow:0 12px 28px -8px rgba(63,179,127,0.55);
+    animation: cta-pulse-green 2.4s ease-in-out infinite;
+    animation-delay:1.2s;
+  }
+  .cta:hover{
+    transform:translateY(-5px) scale(1.06);
+    box-shadow:0 20px 38px -8px rgba(215,171,79,0.8);
+    filter:brightness(1.12);
+    background-position:100% 100%;
+    animation-play-state:paused;
+  }
+  .cta.secondary:hover{
+    box-shadow:0 20px 38px -8px rgba(63,179,127,0.75);
+  }
+  .cta:active{ transform:translateY(-1px) scale(0.98); }
+
+  @keyframes cta-pulse{
+    0%,100%{ box-shadow:0 12px 28px -8px rgba(215,171,79,0.6), 0 0 0 0 rgba(215,171,79,0.5); }
+    50%{ box-shadow:0 12px 28px -8px rgba(215,171,79,0.6), 0 0 0 10px rgba(215,171,79,0); }
+  }
+  @keyframes cta-pulse-green{
+    0%,100%{ box-shadow:0 12px 28px -8px rgba(63,179,127,0.55), 0 0 0 0 rgba(63,179,127,0.5); }
+    50%{ box-shadow:0 12px 28px -8px rgba(63,179,127,0.55), 0 0 0 10px rgba(63,179,127,0); }
+  }
+
+  .cta-sub{ margin-top:2px; font-size:12.5px; color:var(--muted); }
+
+  /* ---- Feature ledger ---- */
+  .ledger{
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:var(--panel);
+    overflow:hidden;
+    margin-bottom:26px;
+  }
+  .ledger-row{
+    display:flex; align-items:flex-start; gap:14px;
+    padding:17px 18px;
+    border-bottom:1px solid var(--line);
+    transition:background .2s ease;
+  }
+  .ledger-row:last-child{ border-bottom:none; }
+  .ledger-row:hover{ background:rgba(215,171,79,0.05); }
+  .ledger-row:hover .ledger-icon{
+    background:rgba(215,171,79,0.14);
+    border-color:rgba(215,171,79,0.4);
+    transform:scale(1.06);
+  }
+  .ledger-icon{
+    flex:0 0 auto;
+    width:38px; height:38px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(63,179,127,0.10);
+    border:1px solid rgba(63,179,127,0.28);
+    font-size:17px;
+    transition:background .2s ease, border-color .2s ease, transform .2s ease;
+    animation: icon-bob 2.8s ease-in-out infinite;
+  }
+  .ledger-row:nth-child(1) .ledger-icon{ animation-delay:0s; }
+  .ledger-row:nth-child(2) .ledger-icon{ animation-delay:.35s; }
+  .ledger-row:nth-child(3) .ledger-icon{ animation-delay:.7s; }
+  @keyframes icon-bob{
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-3px) rotate(-4deg); }
+  }
+  .ledger-text b{ display:block; font-size:14.5px; color:var(--text); font-weight:600; margin-bottom:2px; }
+  .ledger-text span{ font-size:13.5px; color:var(--muted); line-height:1.5; }
+
+  footer{ text-align:center; padding:0 0 30px; }
+  .foot-links{ font-size:12.5px; color:var(--muted); margin-bottom:14px; }
+  .foot-links a{ color:var(--muted); text-decoration:none; margin:0 8px; transition:color .2s ease; }
+  .foot-links a:hover{ color:var(--gold-soft); }
+
+  .meta-note{ font-size:11px; color:#5c6b62; max-width:360px; margin:0 auto 14px; line-height:1.7; }
+  .meta-note a{ color:var(--up); text-decoration:none; }
+  .meta-note a:hover{ text-decoration:underline; }
+
+  .disclaimer{
+    font-size:11px; color:#8a7a55; max-width:380px; margin:0 auto 10px; line-height:1.7;
+    border:1px solid rgba(215,171,79,0.2); border-radius:10px; padding:12px 14px;
+    background:rgba(215,171,79,0.04);
+    transition:border-color .3s ease, background .3s ease;
+    cursor:default;
+  }
+  .disclaimer:hover{
+    border-color:rgba(215,171,79,0.45);
+    background:rgba(215,171,79,0.08);
+  }
+  .disclaimer b{ color:var(--gold-soft); }
+
+  .age-note{ font-size:11px; color:#5c6b62; max-width:360px; margin:0 auto; line-height:1.7; }
+
+  a:focus-visible, .cta:focus-visible{ outline:2px solid var(--gold-soft); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<div class="top-banner gu">🚀 <b>ગુજરાતના ટ્રેડર્સ માટે:</b> Daily Nifty &amp; BankNifty Analysis</div>
+
+<header class="hero">
+  <svg class="chart-bg" viewBox="0 0 500 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polyline points="0,150 40,140 70,160 100,120 130,135 160,90 190,105 220,70 250,85 280,55 310,68 340,40 370,52 400,30 430,42 460,20 500,32"
+      fill="none" stroke="rgba(63,179,127,0.35)" stroke-width="2"/>
+    <polyline points="0,150 40,140 70,160 100,120 130,135 160,90 190,105 220,70 250,85 280,55 310,68 340,40 370,52 400,30 430,42 460,20 500,32 500,220 0,220"
+      fill="url(#g1)" stroke="none"/>
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(63,179,127,0.18)"/>
+        <stop offset="100%" stop-color="rgba(63,179,127,0)"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="wrap hero-inner">
+    <div class="badge-ring">
+      <img src="https://i.ibb.co/TST55dB/541251281-17857953192499722-1362993742765339255-n.jpg" alt="Gujarati Trader">
+    </div>
+
+    <h1 class="brand display">GUJARATI <span>TRADER</span></h1>
+    <div class="role">Market Analyst &amp; Educator</div>
+
+    <p class="tagline gu">સ્ટોક માર્કેટ શીખો સરળ ગુજરાતી ભાષામાં. સ્ટોક માર્કેટના ડેઇલી અપડેટ્સ માટે જોડાઓ.</p>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-num">6+</div>
+        <div class="stat-label gu">વર્ષનો અનુભવ</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">10K+</div>
+        <div class="stat-label gu">સભ્યો</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">Daily</div>
+        <div class="stat-label gu">લાઇવ અપડેટ્સ</div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <a class="cta" href="https://t.me/+8NLAZuBXFCNkMGZl" target="_blank" rel="noopener">
+        🚀 JOIN FREE TELEGRAM <span class="gu">(ફ્રી જુઓ)</span>
+      </a>
+      <div class="cta-sub">Free to join · Daily updates</div>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-row">
+        <div class="ledger-icon">📊</div>
+        <div class="ledger-text"><b class="gu">ડેઇલી ઇન્ટ્રાડે એનાલિસિસ</b><span>Daily Intraday Levels</span></div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-icon">📈</div>
+        <div class="ledger-text"><b class="gu">નિફ્ટી અને બેંકનિફ્ટી</b><span>Nifty &amp; BankNifty Setup</span></div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-icon">📚</div>
+        <div class="ledger-text"><b class="gu">ફ્રી લર્નિંગ કન્ટેન્ટ</b><span>Educational Trading Content</span></div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <a class="cta secondary" href="https://t.me/+8NLAZuBXFCNkMGZl" target="_blank" rel="noopener">
+        📩 JOIN TELEGRAM <span class="gu">ચેનલ</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="#">Privacy Policy</a> | <a href="#">Disclaimer</a> | <a href="#">Terms</a>
+    </div>
+
+    <div class="meta-note gu">
+      અમે એનાલિટિક્સ માટે Meta Pixel નો ઉપયોગ કરીએ છીએ. અમે કોઈ અંગત નાણાકીય માહિતી એકત્રિત કરતા નથી.<br>
+      Ads by <a href="https://t.me/srsagency" target="_blank" rel="noopener">SRS Ads</a>
+    </div>
+
+    <div class="disclaimer gu">
+      <b>ડીસ્ક્લેમર:</b> અમે SEBI રજિસ્ટર્ડ નથી. આ પેજ માત્ર શૈક્ષણિક હેતુ (Educational Purpose) માટે છે. ટ્રેડિંગ જોખમી છે, પોતાના જોખમે વેપાર કરો.
+    </div>
+
+    <div class="age-note gu">ભાગ લેવા માટે ઉંમર ૧૮+ હોવી જરૂરી છે. તમામ કન્ટેન્ટ માત્ર લર્નિંગ હેતુ માટે છે.</div>
+  </div>
+</footer>
+
+</body>
+</html>
